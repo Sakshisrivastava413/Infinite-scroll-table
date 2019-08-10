@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Spin } from 'antd';
 import { InfinityTable as Table } from 'antd-table-infinity';
 import { columns, fetchData } from './mockData';
 
@@ -17,6 +18,18 @@ class App extends Component {
       })),
     );
   };
+  loadMoreContent = () => (
+    <div
+      style={{
+        textAlign: 'center',
+        paddingTop: 40,
+        paddingBottom: 40,
+        border: '1px solid #e8e8e8',
+      }}
+    >
+      <Spin tip="Loading..." />
+    </div>
+  );
 
   render() {
     return (
@@ -26,6 +39,7 @@ class App extends Component {
         onFetch={this.handleFetch}
         pageSize={100}
         columns={columns}
+        loadingIndicator={this.loadMoreContent()}
         scroll={{ y: 450 }}
         dataSource={this.state.data}
         bordered
